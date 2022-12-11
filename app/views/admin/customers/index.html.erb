@@ -1,0 +1,26 @@
+<nain>
+  <h2>会員一覧</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>会員id</th>
+        <th>氏名</th>
+        <th>メールアドレス</th>
+        <th>ステータス</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% @customers.each do |customer| %>
+      <tr>
+        <th><%= 会員id %></th>
+        <th><%= customer.name %></th>
+        <th><%= customer.email %></th>
+        <th><%= ステーーーーータス %></th>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</nain>
