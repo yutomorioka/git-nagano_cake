@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: "homes#top"
-  get 'homes/about'
+
 
 
   # 顧客用
@@ -18,7 +17,13 @@ Rails.application.routes.draw do
   }
 
   scope module: :public do
-    get 'items' => 'items#index'
+    root to: "homes#top"
+    resources :items, only: [:index, :show]
+    resources :customers, only: [:show, :edit, :update, :unsubscribe, :withdraw]
+    resources :items, only: [:index, :show]
+    resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
+    resources :orders, only: [:new, :comfirm, :complete, :create, :index, :show]
+    resources :adresses, only: [:index, :edit, :create, :update, :destroy]
   end
 
   namespace :admin do

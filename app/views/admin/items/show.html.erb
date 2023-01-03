@@ -1,7 +1,7 @@
 <main>
   <h2>商品詳細</h2>
-  
-  <th><%= item_image @item.get_image %></th>
+
+  <th><%= image_tag @item.get_image(100,100) %></th>
 
   <table>
     <tr>
@@ -12,12 +12,19 @@
       <th>ジャンル</th>
         <td><%= @item.genre.name %></td>
       <th>税込価格(税抜価格)</th>
-        <td>  XXXXX   </td>
+        <td>
+          <%= @item.price.to_s(:delimited) %>
+          (<%= @item.add_tax_price.to_s(:delimited) %>) 円
+        </td>
       <th>販売ステータス</th>
-        <td></td>
+        <% if @item.is_active == true %>
+          <%= "販売中" %>
+        <% else %>
+          <%= "販売停止中" %>
+        <% end %>
     </tr>
   </table>
-  
+
    <%= link_to "編集する",edit_admin_item_path(@item) %>
-  
+
 </main>

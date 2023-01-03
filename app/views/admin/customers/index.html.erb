@@ -13,12 +13,18 @@
     
     <tbody>
       <% @customers.each do |customer| %>
-      <tr>
-        <th><%= 会員id %></th>
-        <th><%= customer.name %></th>
-        <th><%= customer.email %></th>
-        <th><%= ステーーーーータス %></th>
-      </tr>
+        <tr>
+          <td><%= customer.id %></td>
+          <td><%= customer.name %></td>
+          <td><%= customer.email %></td>
+          <td>
+            <% if customer.is_deleted %>
+              <%= "退会" %>
+            <% else %>
+              <%= "有効" %>
+            <% end %>
+          </td>
+        </tr>
       <% end %>
     </tbody>
   </table>
