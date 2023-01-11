@@ -4,7 +4,12 @@ class Public::OrdersController < ApplicationController
     @customer = current_customer
   end
 
-  def comfirm
+  def confirm
+    @order = Order.new(order_params)
+    @cart_items = current_customer.cart_items.all
+    @order.payment_method = params[:order][:payment_method]
+    @order.shipping_cost = 800
+    @total = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
   end
 
   def complete
@@ -14,7 +19,8 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.save
-    redirect_to orders_comfirm_path
+    @cart_products.destroy_all
+    redirect_to orders_confirm_path
   end
 
   def index

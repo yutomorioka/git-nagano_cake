@@ -1,7 +1,7 @@
 <main>
   <h2>商品情報入力</h2>
 
-  <%= form_with model: @order do |f| %>
+  <%= form_with model: @order, url: orders_confirm_path do |f| %>
     <div>
       <h3><%= f.label :payment_method, "支払方法" %></h3>
         <%= f.radio_button :payment_method, "credit_card" %>
