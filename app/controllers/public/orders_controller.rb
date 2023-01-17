@@ -8,7 +8,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.save
-    @cart_products.destroy_all
+    @cart_items.destroy_all
     redirect_to orders_confirm_path
   end
 
@@ -20,17 +20,19 @@ class Public::OrdersController < ApplicationController
     @total_payment = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
     
     if params[:order][:address] == "0"
+      @order = Order.new(order_params)
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.name = current_customer.last_name + " " + current_customer.first_name
       render 'confirm'
     elsif params[:order][:address] == "1"
+      @order = Order.new(order_params)
       @address = Addreaa.find(params[:order][:id])
       @order.postal_code = @address.postal_code
       @order.address = @address.address
-      @order.name = @ship_city.name
+      @order.name = @address.name
       render 'confirm'
-    elsif params[:order][:city_option] == "2"
+    elsif params[:order][:address] == "2"
       @address = current_customer.addresses.new
       @address.address = params[:order][:address]
       @address.name = params[:order][:name]
