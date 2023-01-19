@@ -35,7 +35,7 @@
             <tr>
               <td class="confirm-td">送料</td>
               <td>
-                  ¥<%= @order.shipping_cost %>円
+                  ¥<%= @order.shipping_cost.to_s(:delimited) %>円
               </td>
             </tr>
             <tr>
@@ -58,7 +58,7 @@
           <h4><%= @order.payment_method %></h4>
           <%= f.hidden_field :payment_method, :value => @order.payment_method %></br>
         <h3>お届け先</h3>
-          <%= @order.postal_code.to_s.insert(3, "-") %></br>
+          <%= @order.postal_code %></br>
           <%= f.hidden_field :postal_code, :value => @order.postal_code %>
           <%= @order.address %></br>
           <%= f.hidden_field :address, :value => @order.address %>

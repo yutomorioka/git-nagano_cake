@@ -3,7 +3,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new
     @customer = current_customer
   end
-  
+
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
@@ -18,33 +18,25 @@ class Public::OrdersController < ApplicationController
     @order.payment_method = params[:order][:payment_method]
     @order.shipping_cost = 800
     @total_payment = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
-    
-    if params[:order][:address] == "0"
-      @order = Order.new(order_params)
+
+    if params[:order][:select_address] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
       @order.name = current_customer.last_name + " " + current_customer.first_name
       render 'confirm'
-    elsif params[:order][:address] == "1"
+    elsif params[:order][:select_address] == "1"
       @order = Order.new(order_params)
       @address = Addreaa.find(params[:order][:id])
       @order.postal_code = @address.postal_code
       @order.address = @address.address
       @order.name = @address.name
       render 'confirm'
-    elsif params[:order][:address] == "2"
-      @address = current_customer.addresses.new
-      @address.address = params[:order][:address]
-      @address.name = params[:order][:name]
-      @address.postal_code= params[:order][:postal_code]
-      @address.customer_id = current_customer.id
-      if @address.save
-      @order.postal_code = @address.postal_code
-      @order.name = @address.name
-      @order.address = @address.address
-      else
-       render 'new'
-      end
+    elsif params[:order][:select_address] == "2"
+      @order.postal_code = params[:order][:postal_code]
+      @order.address = params[:order][:address]
+      @order.name = params[:order][:name]
+    else
+      render 'new'
     end
   end
 
