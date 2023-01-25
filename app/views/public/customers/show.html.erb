@@ -12,7 +12,7 @@
       </tr>
       <tr>
         <td class="active">カナ</td>
-        <td><%= (@customer.first_name_kana + @customer.last_name_kana) %></td>
+        <td><%= (@customer.kana_first_name + @customer.kana_last_name) %></td>
       </tr>
       <tr>
         <td class="active">郵便番号</td>
@@ -20,7 +20,7 @@
       </tr>
       <tr>
         <td class="active">住所</td>
-        <td><%= @customer.adress %></td>
+        <td><%= @customer.address %></td>
       </tr>
       <tr>
         <td class="active">電話番号</td>
@@ -34,7 +34,7 @@
   </table>
   
   <h2>配送先</h2>
-  <%= link_to "一覧を見る", adresses_path %>
+  <%= link_to "一覧を見る", addresses_path %>
   
   <h2>注文履歴</h2>
   <%= link_to"一覧を見る",orders_path %>
