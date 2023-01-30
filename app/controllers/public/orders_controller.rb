@@ -34,8 +34,7 @@ class Public::OrdersController < ApplicationController
       @order.name = current_customer.last_name + " " + current_customer.first_name
       render 'confirm'
     elsif params[:order][:select_address] == "1"
-      @order = Order.new(order_params)
-      @address = Addreaa.find(params[:order][:id])
+      @address = Address.find(params[:order][:address_id])
       @order.postal_code = @address.postal_code
       @order.address = @address.address
       @order.name = @address.name

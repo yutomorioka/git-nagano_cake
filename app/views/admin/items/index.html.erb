@@ -1,10 +1,15 @@
 <main>
   <h2>商品一覧</h2>
-  
+  <div class="col-xs-9">
+    <div class="text-right">
+      <%= link_to new_admin_item_path do %>
+        <button type="button" class="btn-outline-dark btn-circle btn-lg">＋</button>
+      <% end %>
+  </div>
   <table>
     <thead>
       <tr>
-        <th>商品id</th>
+        <th>商品ID</th>
         <th>商品名</th>
         <th>税抜価格</th>
         <th>ジャンル</th>

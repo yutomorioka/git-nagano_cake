@@ -20,8 +20,8 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get "/home/about" => "homes#about", as: "about"
     resources :items, only: [:index, :show]
-    get "/customers/unsubscribe" => "customers#unsubscribe"
-    patch "/customers/withdraw" => "customers#withdraw"
+    get "/customers/:id/unsubscribe" => "customers#unsubscribe", as: 'customers/unsubscribe'
+    patch "/customers/:id/withdraw" => "customers#withdraw", as: 'customers/withdraw'
     resources :customers, only: [:show, :edit, :update]
     
     resources :items, only: [:index, :show]
@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     root to: "homes#top"
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
+    resources :customers, only: [:index, :show, :edit, :update]
     resources :orders, only: [:show, :update]
     resources :orders, only: [:update]
   end
