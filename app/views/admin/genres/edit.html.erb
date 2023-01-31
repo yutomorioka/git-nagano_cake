@@ -2,5 +2,5 @@
 
 <%= form_with model: @genre, url: admin_genre_path do |f| %>
   <%= f.text_field :name %>
-  <%= f.submit "変更を保存" %>
+  <%= f.submit "変更を保存" , class: "btn btn-primary genre_btn" %>
 <% end %>  
